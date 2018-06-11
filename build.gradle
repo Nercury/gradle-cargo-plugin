@@ -1,0 +1,45 @@
+buildscript {
+    ext.kotlin_version = '1.2.41'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'maven-publish'
+
+group 'com.nercury.cargobuild'
+version '1.0.0'
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.nercury'
+            artifactId 'cargobuild'
+            version '1.0.0'
+
+            from components.java
+        }
+    }
+}
